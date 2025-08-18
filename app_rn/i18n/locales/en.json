@@ -1,0 +1,11 @@
+{
+  "welcome": "Welcome to the Coffee Shop",
+  "switchToEnglish": "Switch to English",
+  "switchToSpanish": "Switch to Spanish",
+  "home": {
+    "title": "Morning Coffee",
+    "description": "Welcome to the Coffee Shop",
+    "products": "Products",
+    "productsDescription": "Here you can find the best coffee in Colombia"
+  }
+}
