@@ -1,0 +1,11 @@
+{
+  "welcome": "Bienvenido a la tienda del Café",
+  "switchToEnglish": "Cambiar a Inglés",
+  "switchToSpanish": "Cambiar a Español",
+  "home": {
+    "title": "Café de la mañana",
+    "description": "Bienvenido a la tienda del Café",
+    "products": "Productos",
+    "productsDescription": "Aquí puedes encontrar el mejor café colombiano"
+  }
+}
