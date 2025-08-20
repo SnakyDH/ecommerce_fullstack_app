@@ -6,6 +6,25 @@
     "title": "Morning Coffee",
     "description": "Welcome to the Coffee Shop",
     "products": "Products",
-    "productsDescription": "Here you can find the best coffee in Colombia"
+    "productsDescription": "Here you can find the best coffee in Colombia",
+    "loadingMoreProducts": "Loading more products...",
+    "noProductsFound": "No products found"
+  },
+  "product": {
+    "productDetails": "Product Details",
+    "description": "Description",
+    "highQualityPrefix": "High-quality ",
+    "highQualitySuffix": " with excellent features and great value for money. Perfect for daily use and built to last.",
+    "buyNow": "Buy Now",
+    "inStock": "in stock",
+    "outOfStock": "Out of stock",
+    "total": "Total",
+    "productNotFound": "Product not found",
+    "loadingProduct": "Loading product...",
+    "goBack": "Go Back",
+    "quantity": "Quantity",
+    "available": "available",
+    "loadingImage": "Loading image...",
+    "imageNotAvailable": "Image not available"
   }
 }

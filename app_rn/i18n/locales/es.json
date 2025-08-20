@@ -6,6 +6,25 @@
     "title": "Café de la mañana",
     "description": "Bienvenido a la tienda del Café",
     "products": "Productos",
-    "productsDescription": "Aquí puedes encontrar el mejor café colombiano"
+    "productsDescription": "Aquí puedes encontrar el mejor café colombiano",
+    "loadingMoreProducts": "Cargando más productos...",
+    "noProductsFound": "No se encontraron productos"
+  },
+  "product": {
+    "productDetails": "Detalles del producto",
+    "description": "Descripción",
+    "highQualityPrefix": "De alta calidad ",
+    "highQualitySuffix": " con excelentes características y gran valor por el dinero. Perfecto para uso diario y construido para durar.",
+    "buyNow": "Comprar ahora",
+    "inStock": "en stock",
+    "outOfStock": "Agotado",
+    "total": "Total",
+    "productNotFound": "Producto no encontrado",
+    "loadingProduct": "Cargando producto...",
+    "goBack": "Regresar",
+    "quantity": "Cantidad",
+    "available": "disponible",
+    "loadingImage": "Cargando imagen...",
+    "imageNotAvailable": "Imagen no disponible"
   }
 }

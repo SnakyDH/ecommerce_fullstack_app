@@ -1,7 +1,7 @@
 import { Colors } from "@/constants/Colors";
 import { Locales } from "@/constants/Locales";
 import { useTranslation } from "react-i18next";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { ThemedText } from "../ThemedText";
 import { Images } from "@/constants/Images";
 import { SafeAreaView } from "react-native-safe-area-context";
