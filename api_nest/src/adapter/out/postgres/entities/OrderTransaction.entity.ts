@@ -23,7 +23,7 @@ export class OrderTransactionEntity implements Omit<OrderTransaction, 'product' 
   @Column()
   quantity: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
+  @Column({ type: 'decimal', precision: 15, scale: 2, nullable: true })
   total?: number;
 
   @Column({

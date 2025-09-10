@@ -31,10 +31,10 @@ export class InitTransactionUseCase {
       throw new ExceptionCustom(ExceptionConstants.PRODUCT_NOT_FOUND);
     }
 
-    const total = product.price * request.quantity;
+    const total = parseFloat((product.price * request.quantity).toFixed(2));
 
 
-    const transactionData: Omit<OrderTransaction, 'id' | 'createdAt' | 'delivery'> = {
+    const transactionData: Omit<OrderTransaction, 'id' | 'createdAt' | 'delivery' | 'paymentGatewayTransactionId'> = {
       quantity: request.quantity,
       product,
       total,
