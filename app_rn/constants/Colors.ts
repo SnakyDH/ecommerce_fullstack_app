@@ -13,4 +13,5 @@ export const Colors = {
   tabIconDefault: '#9BA1A6',
   tabIconSelected: tintColorDark,
   primary: '#b86614',
+  cardHighlight: '#3A2611',
 };

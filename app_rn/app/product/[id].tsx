@@ -18,6 +18,7 @@ import { Colors } from '@/constants/Colors';
 import { useGetProductsQuery } from '@/store/api/productsApi';
 import { Product } from '@/types/product';
 import { useTranslation } from 'react-i18next';
+import RequestAcceptPresignedModal from '@/components/ui/RequestAcceptPresignedModal';
 
 export default function ProductDetail() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -25,6 +26,7 @@ export default function ProductDetail() {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
+  const [showPresignedModal, setShowPresignedModal] = useState(false);
   const { t } = useTranslation();
   const { data: productsResponse, isLoading, error } = useGetProductsQuery({ limit: 100 });
   const product = productsResponse?.data?.find((p: Product) => p.id.toString() === id);
@@ -40,25 +42,19 @@ export default function ProductDetail() {
 
   const handleBuyNow = async () => {
     if (!product) return;
+    setShowPresignedModal(true);
+  };
 
-    Alert.alert(
-      'Buy Now',
-      `Purchase ${selectedQuantity} x ${product.name} for ${(product.price * selectedQuantity).toLocaleString('es-CO', {
-        style: 'currency',
-        currency: 'COP',
-      })}?`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Confirm Purchase',
-          onPress: () => {
-            // Implement purchase logic
-            Alert.alert('Success', 'Purchase completed successfully!');
-            router.back();
-          },
-        },
-      ]
-    );
+  const handlePresignedAccept = (transactionId: number, acceptedTerms: { [key: string]: boolean }) => {
+    setShowPresignedModal(false);
+    router.push({
+      pathname: '/transaction',
+      params: { transactionId }
+    });
+  };
+
+  const handlePresignedClose = () => {
+    setShowPresignedModal(false);
   };
 
   if (isLoading) {
@@ -205,6 +201,19 @@ export default function ProductDetail() {
           </View>
         )}
       </SafeAreaView>
+
+      {/* Presigned Modal */}
+      {product && (
+        <RequestAcceptPresignedModal
+          visible={showPresignedModal}
+          onClose={handlePresignedClose}
+          onAccept={handlePresignedAccept}
+          productName={product.name}
+          productPrice={product.price}
+          quantity={selectedQuantity}
+          productId={product.id}
+        />
+      )}
     </>
   );
 }

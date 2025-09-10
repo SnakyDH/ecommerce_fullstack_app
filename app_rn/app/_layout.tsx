@@ -16,7 +16,6 @@ export default function RootLayout() {
   });
 
   if (!loaded) {
-    // Async font loading only occurs in development.
     return null;
   }
   return (
@@ -45,6 +44,10 @@ export default function RootLayout() {
                 headerShown: true
               }}
             />
+            <Stack.Screen name='transaction' options={{
+              title: 'Transaction',
+              headerShown: true,
+            }} />
             <Stack.Screen name="+not-found" />
           </Stack>
           <StatusBar style="auto" />
