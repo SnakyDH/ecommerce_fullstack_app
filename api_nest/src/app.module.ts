@@ -5,6 +5,7 @@ import { typeOrmConfig } from './config/data-source.options';
 import { PresignedModule } from '@modules/presigned.module';
 import { DeliveryModule } from './modules/delivery.module';
 import { TransactionModule } from './modules/transaction.module';
+import { PaymentModule } from '@modules/payment.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { TransactionModule } from './modules/transaction.module';
     ProductsModule,
     PresignedModule,
     DeliveryModule,
+    PaymentModule,
     TransactionModule,
   ],
   controllers: [],

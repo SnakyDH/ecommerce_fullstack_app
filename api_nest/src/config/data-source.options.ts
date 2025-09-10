@@ -17,7 +17,7 @@ export const typeOrmConfig: DataSourceOptions = {
     path.join(__dirname, '../db/seeds/*.ts'),
   ],
   synchronize: false,
-  logging: true,
+  logging: false,
 };
 
 const appDataSource = new DataSource(typeOrmConfig);

@@ -32,9 +32,10 @@ export class InitTransactionUseCase {
     }
 
     const total = parseFloat((product.price * request.quantity).toFixed(2));
-
+    const vat = parseFloat((total * 0.19).toFixed(2));
 
     const transactionData: Omit<OrderTransaction, 'id' | 'createdAt' | 'delivery' | 'paymentGatewayTransactionId'> = {
+      vat,
       quantity: request.quantity,
       product,
       total,

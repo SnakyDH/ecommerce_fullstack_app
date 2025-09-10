@@ -13,5 +13,8 @@ export interface OrderTransaction {
   status: TransactionStatus;
   acceptanceEndUserPolicy?: Presigned;
   acceptancePersonalDataAuthorization?: Presigned;
+  acceptanceEndUserPolicyToken?: string;
+  acceptancePersonalDataAuthorizationToken?: string;
   createdAt: Date;
+  vat: number;
 }

@@ -3,6 +3,8 @@ import {
   Post,
   Body,
   InternalServerErrorException,
+  Get,
+  Param,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { InitTransactionRequestDto } from '../dtos/init-transaction-request.dto';
@@ -13,6 +15,8 @@ import { ExceptionCustom } from '../../../../domain/common/exceptions/exception-
 import { FinishTransactionRequestDto } from '../dtos/finish-transaction-request.dto';
 import { FinishTransactionResponseDto } from '../dtos/finish-transaction-response.dto';
 import { FinishTransactionHandler } from '../handlers/finish-transaction.handler';
+import { GetTransactionByIdResponseDto } from '../dtos/get-transaction-by-id.response.dto';
+import { GetTransactionByIdHandler } from '../handlers/get-transaction-by-id.handler';
 
 @ApiTags('transactions')
 @Controller('transactions')
@@ -21,6 +25,7 @@ export class TransactionController {
     private readonly initTransactionHandler: InitTransactionHandler,
     private readonly finishTransactionHandler: FinishTransactionHandler,
     private readonly httpExceptionHandler: HttpExceptionHandler,
+    private readonly getTransactionByIdHandler: GetTransactionByIdHandler,
   ) { }
 
   @Post('init-transaction')
@@ -91,5 +96,33 @@ export class TransactionController {
       }
       throw new InternalServerErrorException(error);
     }
+  }
+
+  @Get('approved-transaction-by-id/:id')
+  @ApiOperation({
+    summary: 'Get approved transaction by id',
+    description: 'Get approved transaction by id',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Approved transaction retrieved successfully',
+    type: GetTransactionByIdResponseDto,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Approved transaction not found',
+  })
+  async getApprovedTransactionById(
+    @Param('id') id: number,
+  ): Promise<GetTransactionByIdResponseDto> {
+    try {
+      return await this.getTransactionByIdHandler.execute(id);
+    } catch (error) {
+      if (error instanceof ExceptionCustom) {
+        return this.httpExceptionHandler.handle(error);
+      }
+      throw new InternalServerErrorException(error);
+    }
+
   }
 }

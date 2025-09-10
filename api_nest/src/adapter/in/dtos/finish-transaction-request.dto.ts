@@ -5,7 +5,7 @@ import { IsCreditCard, IsNumber, IsPositive, IsString, MaxLength, ValidateNested
 
 class PaymentCardDto {
   @ApiProperty()
-  @IsCreditCard()
+  @IsString()
   number: string;
 
   @ApiProperty()
@@ -76,11 +76,12 @@ export class FinishTransactionRequestDto {
   @Type(() => PaymentCardDto)
   paymentCard: PaymentCardDto;
 
+  @ApiProperty({
+    type: DeliveryDto,
+  })
   @ValidateNested()
   @Type(() => DeliveryDto)
   delivery: DeliveryDto;
-
-
 }
 
 

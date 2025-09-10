@@ -23,17 +23,16 @@ export class PaymentWompiRepository implements IPaymentGatewayRepository {
       exp_year: paymentCard.expirationYear,
       card_holder: paymentCard.holderName,
     });
-    const signature = `${this.projectKey}-${transaction.id}${transaction.total}COP${envOptions.wompi.privateKey}`;
-
+    const amountInCents = transaction.total! * 100;
+    const signature = `${this.projectKey}-${transaction.id}${amountInCents}COP${envOptions.wompi.privateKey}`;
     const encryptedSignature = crypto
       .createHash('sha256')
       .update(signature)
       .digest('hex');
-
-
+      
     const createTransactionRequest: PostCreateTransactionRequestDto = {
-      acceptance_token: transaction.acceptanceEndUserPolicy!.token,
-      amount_in_cents: transaction.total!,
+      acceptance_token: transaction.acceptanceEndUserPolicyToken!,
+      amount_in_cents: amountInCents,
       currency: 'COP',
       signature: encryptedSignature,
       customer_email: transaction.delivery?.customerEmail!,
@@ -55,7 +54,10 @@ export class PaymentWompiRepository implements IPaymentGatewayRepository {
         region: transaction.delivery?.region!,
       },
     };
+    console.log('createTransactionRequest', createTransactionRequest);
     const creationResult = await this.createTransaction(createTransactionRequest);
+    console.log('creationResult', creationResult);
+
     if (creationResult.data.status !== WompiTransactionStatus.PENDING) {
       return {
         id: creationResult.data.id,
@@ -100,23 +102,23 @@ export class PaymentWompiRepository implements IPaymentGatewayRepository {
 
 
   private async createTransaction(wompiRequest: PostCreateTransactionRequestDto): Promise<PostCreateTransactionResponseDto> {
-    const privApiKey = envOptions.wompi.privateKey;
-
+    console.log('Initializing transaction', wompiRequest);
     const response = await fetch(`${envOptions.wompi.baseUrl}/transactions`,
       {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${privApiKey}`,
+          Authorization: `Bearer ${envOptions.wompi.privateKey}`,
         },
         body: JSON.stringify(wompiRequest),
       }
     );
+    console.log('Transaction created', (await response.json()).error.messages);
     return (await response.json()) as PostCreateTransactionResponseDto;
 
   }
   private async tokenizeCard(paymentCard: PostCardTokenizedRequestDto): Promise<PostCardTokenizedResponseDto> {
     const response = await fetch(
-      `${envOptions.wompi.baseUrl}/cards/tokenize`,
+      `${envOptions.wompi.baseUrl}/tokens/cards`,
       {
         method: 'POST',
         body: JSON.stringify(paymentCard),

@@ -8,6 +8,7 @@ import { OrderTransaction } from "../model/transaction.model";
 import { TransactionStatus } from "../enums/transaction-status.enum";
 import { PaymentCard } from "../model/credit-card.model";
 import { Delivery } from "@domain/delivery/model/delivery";
+import { Presigned } from "@domain/presigned/model/presigned.model";
 
 export interface FinishTransactionRequest {
   transactionId: number;
@@ -42,12 +43,11 @@ export class FinishTransactionUseCase {
       throw new ExceptionCustom(ExceptionConstants.PRODUCT_OUT_OF_STOCK);
     }
     if (!transaction.delivery) {
-      await this.deliveryRepository.create(request.delivery);
+      transaction.delivery = await this.deliveryRepository.create(request.delivery);
     }
     else {
-      await this.deliveryRepository.update(transaction.delivery.id, transaction.delivery);
+      transaction.delivery = await this.deliveryRepository.update(transaction.delivery.id, transaction.delivery);
     }
-
     const paymentResult = await this.paymentGatewayRepository.pay(transaction, request.paymentCard);
 
     if (paymentResult.status == TransactionStatus.APPROVED) {

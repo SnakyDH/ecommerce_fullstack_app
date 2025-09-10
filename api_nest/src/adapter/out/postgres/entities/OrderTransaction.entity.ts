@@ -51,6 +51,9 @@ export class OrderTransactionEntity implements Omit<OrderTransaction, 'product' 
   @Column({ nullable: true })
   acceptancePersonalDataAuthorizationToken?: string;
 
+  @Column({ type: 'decimal', precision: 15, scale: 2, nullable: true })
+  vat: number;
+
   @ManyToOne(() => ProductEntity, { eager: true })
   @JoinColumn({ name: 'productId' })
   product: ProductEntity;

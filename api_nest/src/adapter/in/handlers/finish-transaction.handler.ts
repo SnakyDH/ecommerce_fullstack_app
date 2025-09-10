@@ -16,13 +16,12 @@ export class FinishTransactionHandler {
         holderName: request.paymentCard.holderName,
       },
       delivery: {
-
         address: request.delivery.address,
         city: request.delivery.city,
         region: request.delivery.region,
+        phone: request.delivery.phone,
         postalCode: request.delivery.postalCode,
         country: request.delivery.country,
-        phone: request.delivery.phone,
         customerEmail: request.delivery.customerEmail,
         customer: request.delivery.customer,
       },

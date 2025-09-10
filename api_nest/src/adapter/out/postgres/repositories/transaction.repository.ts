@@ -6,6 +6,7 @@ import { OrderTransaction } from '@domain/transaction/model/transaction.model';
 import { OrderTransactionEntity } from '../entities/OrderTransaction.entity';
 import { ExceptionCustom } from '@domain/common/exceptions/exception-custom';
 import { ExceptionConstants } from '@domain/common/exceptions/exception.constants';
+import { TransactionStatus } from '@domain/transaction/enums/transaction-status.enum';
 
 @Injectable()
 export class TransactionRepository implements ITransactionRepository {
