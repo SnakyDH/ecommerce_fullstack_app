@@ -10,6 +10,7 @@ import { Product } from '@domain/products/model/product.model';
 
 @Entity('products')
 export class ProductEntity implements Product {
+
   @PrimaryGeneratedColumn()
   id: number;
 

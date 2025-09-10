@@ -13,10 +13,20 @@ export class GetProductsUseCase {
     limit: number,
     filter?: ProductFilter,
   ): Promise<PaginationModel<Product>> {
-    const products = await this.productRepository.findAll(page, limit, filter);
-    if (products.data.length <= 0) {
+    const productsPaginated = await this.productRepository.findAll(page, limit, filter);
+    if (productsPaginated.data.length <= 0) {
       throw new ExceptionCustom(ExceptionConstants.PRODUCT_NOT_FOUND);
     }
-    return products;
+
+    productsPaginated.data.forEach((product) => {
+      product.price = this.formatPrice(product.price);
+    });
+
+
+    return productsPaginated;
+  }
+
+  private formatPrice(price: number): number {
+    return price / 100;
   }
 }

@@ -5,12 +5,17 @@ import { IProductRepository } from '@domain/products/repository/product-reposito
 import { ProductEntity } from '@adapter/out/postgres/entities/product.entity';
 import { Between, FindOperator, ILike, LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { ProductFilter } from '@domain/products/model/product-filter.model';
+import { ProductEntityToDomainMapper } from '../mappers/product-db-to-domain.mapper';
 
 export class ProductRepository implements IProductRepository {
   constructor(
     @InjectRepository(ProductEntity)
     private productRepository: Repository<ProductEntity>,
   ) { }
+  async findById(id: number): Promise<Product | null> {
+    const product = await this.productRepository.findOne({ where: { id } });
+    return product ? ProductEntityToDomainMapper.toDomain(product) : null;
+  }
 
   async findAll(
     page: number,

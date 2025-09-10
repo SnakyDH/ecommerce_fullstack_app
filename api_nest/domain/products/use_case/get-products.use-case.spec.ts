@@ -30,14 +30,14 @@ describe('GetProductsUseCase', () => {
         image: 'image1.jpg',
         price: 100,
         stock: 10,
-      },
+      } as Product,
       {
         id: 2,
         name: 'Product 2',
         image: 'image2.jpg',
         price: 200,
         stock: 20,
-      },
+      } as Product,
     ];
 
     const paginationModel = new PaginationModel<Product>(
@@ -91,7 +91,7 @@ describe('GetProductsUseCase', () => {
         image: 'image1.jpg',
         price: 100,
         stock: 10,
-      },
+      } as Product,
     ];
 
     const paginationModel = new PaginationModel<Product>(
@@ -143,7 +143,7 @@ describe('GetProductsUseCase', () => {
         image: 'laptop.jpg',
         price: 1500,
         stock: 5,
-      },
+      } as Product,
     ];
 
     const paginationModel = new PaginationModel<Product>(

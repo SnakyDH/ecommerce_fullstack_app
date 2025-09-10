@@ -31,6 +31,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     ProductMapper,
     HttpExceptionHandler,
   ],
-  exports: [GetProductsHandler, ProductMapper],
+  exports: ['IProductRepository', GetProductsHandler, ProductMapper],
 })
 export class ProductsModule { }

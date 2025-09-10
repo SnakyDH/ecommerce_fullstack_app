@@ -27,6 +27,6 @@ import { PresignedWompiService } from 'src/adapter/out/wompi/repository/presigne
     },
     HttpExceptionHandler,
   ],
-  exports: [GetPresignedHandler],
+  exports: ['IPresignedRepository', GetPresignedHandler],
 })
 export class PresignedModule { }
