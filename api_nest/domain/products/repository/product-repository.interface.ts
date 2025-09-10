@@ -3,6 +3,7 @@ import { Product } from '../model/product.model';
 import { ProductFilter } from '../model/product-filter.model';
 
 export interface IProductRepository {
+  updateStock(id: number, quantity: number): Promise<void>;
   findAll(page: number, limit: number, filter?: ProductFilter): Promise<PaginationModel<Product>>;
   findById(id: number): Promise<Product | null>;
 }

@@ -1,4 +1,4 @@
-export interface CreditCard {
+export interface PaymentCard {
   number: string;
   cvv: string;
   expirationMonth: string;

@@ -12,6 +12,9 @@ import { DeliveryModule } from './delivery.module';
 import { ITransactionRepository } from '@domain/transaction/repository/transaction-repository.interface';
 import { IPresignedRepository } from '@domain/presigned/repository/presigned-repository.interface';
 import { IProductRepository } from '@domain/products/repository/product-repository.interface';
+import { FinishTransactionUseCase } from '@domain/transaction/use_case/finish-transaction.use-case';
+import { IPaymentGatewayRepository } from '@domain/transaction/repository/payment-gateway-repository.interface';
+import { IDeliveryRepository } from '@domain/delivery/repository/delivery-repository.interface';
 
 @Module({
   imports: [
@@ -41,6 +44,12 @@ import { IProductRepository } from '@domain/products/repository/product-reposito
         'ITransactionRepository',
         'IProductRepository',
       ],
+    },
+    {
+      provide: FinishTransactionUseCase,
+      useFactory: (transactionRepo: ITransactionRepository, productRepo: IProductRepository, deliveryRepo: IDeliveryRepository, paymentGatewayRepo: IPaymentGatewayRepository) =>
+        new FinishTransactionUseCase(transactionRepo, productRepo, deliveryRepo, paymentGatewayRepo),
+      inject: ['ITransactionRepository', 'IProductRepository', 'IDeliveryRepository', 'IPaymentGatewayRepository'],
     },
     {
       provide: InitTransactionHandler,

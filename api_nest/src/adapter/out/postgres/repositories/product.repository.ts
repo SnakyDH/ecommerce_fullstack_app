@@ -12,6 +12,9 @@ export class ProductRepository implements IProductRepository {
     @InjectRepository(ProductEntity)
     private productRepository: Repository<ProductEntity>,
   ) { }
+  async updateStock(id: number, quantity: number): Promise<void> {
+    await this.productRepository.update(id, { stock: quantity });
+  }
   async findById(id: number): Promise<Product | null> {
     const product = await this.productRepository.findOne({ where: { id } });
     return product ? ProductEntityToDomainMapper.toDomain(product) : null;

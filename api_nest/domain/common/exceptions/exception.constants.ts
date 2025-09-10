@@ -6,4 +6,7 @@ export enum ExceptionConstants {
   GET_PERSONAL_DATA_AUTH_ERROR = 'Not found personal data auth',
   DELIVERY_NOT_FOUND = 'Delivery not found',
   TRANSACTION_NOT_FOUND = 'Transaction not found',
+  TRANSACTION_ALREADY_FINISHED = "Transaction already finished",
+  PRODUCT_OUT_OF_STOCK = "Product out of stock",
+  TRANSACTION_REJECTED = "Transaction rejected",
 }
